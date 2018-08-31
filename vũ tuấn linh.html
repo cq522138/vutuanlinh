@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var News = function (title,contents,dateSubmitted,view) {
+        this.title = title;
+        this.contents = contents;
+        this.dateSubmitted = dateSubmitted;
+        this.view = view;
+        
+        this.getTitle = function () {
+            return this.title;
+        }
+        
+        this.getContents = function () {
+            return this.contents;
+        }
+        
+        this.getDateSubmitted = function () {
+            return this.dateSubmitted;
+        }
+        
+        this.getView = function () {
+            return this.view;
+        }
+        
+    }
+    
+    var list = function () {
+        this.listSize = 0;
+        this.pos = 0;
+        this.dataStore = [];
+
+        this.find = function (element) {
+            for (var i = 0; i < this.dataStore.length; ++i) {
+                if (this.dataStore [i] === element) {
+                    return i;
+                }
+            }
+        }
+
+        this.insert = function () {
+            var insertPos = this.find(after);
+            if (insertPos > -1) {
+                this.dataStore.splice(insertPos+1, 0, element);
+                ++this.listSize;
+                return true;
+            }
+            return false;
+        }
+
+        this.append = function (element) {
+            this.dataStore[this.listSize++] = element;
+        }
+
+        this.getElement = function () {
+            return this.dataStore[this.pos];
+        }
+
+        this.remove = function () {
+            var foundAt = this.find(element);
+            if (foundAt > -1) {
+                this.dataStore.splice(foundAt,1);
+                --this.listSize;
+                return true;
+            }
+            return false;
+        }
+
+        this.toString = function () {
+            return this.dataStore;
+        }
+    }
+
+    var new1 = new News("a","aaa","25/6/2018",100);
+    var new2 = new News("b","bbb","26/6/2018",100);
+    var new3 = new News("c","ccc","28/8/2018",200);
+    
+    var listnew = new list();
+    listnew.append(new1);
+    listnew.append(new2);
+    listnew.append(new3);
+
+    //tim tin theo tieu de
+    function seachtitle() {
+        var seachTitle = prompt("nhap vao tieu de can tim");
+        for (var i = 0; i < listnew.dataStore.length; i++) {
+            if (listnew.toString()[i].title === seachTitle) {
+                alert("tim thay");
+                break;
+            }
+        }
+    }
+
+    //hien thi danh sach tin tom luoc
+    function show12() {
+        for(var j=0;j<listnew.dataStore.length;j++){
+            document.writeln(listnew.toString()[j].getTitle()+"-"+listnew.toString()[j].getContents()+"<br>");
+    }
+    }
+
+    //dang tin moi
+    function postnew() {
+        alert(listnew.append(new4));
+    }
+
+    //xoa tin
+    function remove() {
+        var a = prompt("nhap vao ten can xoa")
+        for (var k = 0; k < listnew.dataStore.length; k++) {
+            if (listnew.toString()[k].title === a) {
+               listnew.remove()[k];
+               break;
+            }
+        }
+        alert("tin da duoc xoa");
+    }
+
+
+</script>
+
+<button type="submit" onclick="seachtitle()">tim kiem</button>
+<button type="submit" onclick="show12()">hien thi danh sach tom tat</button>
+<button type="submit" onclick="postnew()">them tin moi</button>
+<button type="submit" onclick="remove()">xoa bai</button>
+</body>
+</html>
